@@ -6,7 +6,7 @@ My own notes and discoverings about Modbus devices I'm working with.
 
 | Register Prefix<br/>(Modicon Notation) | Description                                                      | Usable Function Codes (FC)                              |
 | -------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------- |
-| **0x**                                 | Coils or Discrete Inputs<br/>(digital outputs)                   | **1**: read<br/>**5**: write<br/>**15**: write multiple |
+| **0x**                                 | Coils or Discrete Outputs<br/>(digital outputs)                   | **1**: read<br/>**5**: write<br/>**15**: write multiple |
 | **1x**                                 | Input Status or Discrete Inputs<br/>(digital inputs)             | **2**: read                                             |
 | **3x**                                 | Input Register<br/>(values from analog sensors)                  | **4**: read                                             |
 | **4x**                                 | Holding Register or Keep Register<br/>(configuration parameters) | **3**: read<br/>**6**: write<br/>**16**: write multiple |
