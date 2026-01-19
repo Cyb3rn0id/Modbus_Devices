@@ -106,5 +106,5 @@ Registers have always a length of 2 bytes unless otherwise specified
 
 ### Troubleshooting
 
-- If you're sure sensor is good (it works with other devices) and is correctly connected, try to write 1 in the register `4 0253`
+- If you're sure sensor is good (it works with other devices) and it's properly connected, but you're not able to read temperature value (you always obtain -32768/0x8000), try to write 1 in the register `4 0253`
 - Data lines for each sensors are pulled up by resistor arrays marked as RA1 and RA2: they're array of 4x 4.7kΩ resistors. If you still cannot read temperature from sensor after the change in register `4 0253` you can try to lower the resistance under to 3.9kΩ or 2.7kΩ
