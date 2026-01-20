@@ -6,28 +6,28 @@
 
 ### Main Info
 
-- Manufacturer: [Eletechsup](https://eletechsup.com/)
-- Power Supply: 7÷30VDC
-- Protected against reversed power supply: YES
-- Optoisolated inputs: NO
-- Max working Current: 18mA
-- RS485 Default Config: 9600,N,8,1
-- RS485 Default Address: 1
-- Address changeable by: [x] RS485 command [ ] Hardware
-- Address base: 0
-- Start Address: 0
-- Size (board only): 75 x 50 x 14mm
-- Size (with DIN housing if available): 80 x 54 x 26mm
-- Weight (board only): 36g
-- Weight (with DIN housing if available): 66g
-- Official Product Page: [N4DSC08](https://eletechsup.com/products/n4dsc08-8ch-rs485-ds18b20-sensor-temperature-collector-modbus-remote-io-module-for-plc-paperless-recorder-thermostatic-controls)
-- Sponsored link for buying: n/a
+- **Manufacturer:** [Eletechsup](https://eletechsup.com/)
+- **Power Supply:** 7÷30VDC
+- **Protected against reversed power supply:** YES
+- **Optoisolated inputs:** NO
+- **Max working Current:** 18mA
+- **RS485 Default Config:** 9600,N,8,1
+- **RS485 Default Address:** 1
+- **Address changeable by:** RS485 command
+- **Address base:** 0
+- **Start Address:** 0
+- **Size (board only):** 75 x 50 x 14mm
+- **Size (with DIN housing if available):** 80 x 54 x 26mm
+- **Weight (board only):** 36g
+- **Weight (with DIN housing if available):** 66g
+- **Official Product Page:** [N4DSC08](https://eletechsup.com/products/n4dsc08-8ch-rs485-ds18b20-sensor-temperature-collector-modbus-remote-io-module-for-plc-paperless-recorder-thermostatic-controls)
+- **Sponsored link for buying:** N/A
 
 ### Chips on board
 
-- **MCU** is a **PY32F002A** F15P (*TSSOP20 format*) a 32bit microcontroller having an ARM Cortex M0 core, manufactured by [Puya Semiconductors](https://www.puyasemi.com/)
-- **RS485 transceiver** is a **CS48520S** manufactured by [ChipAnalog](https://e.chipanalog.com/products/interface/interface/interface3/1178)
-- **Voltage Regulator**  is a 78M05
+- **MCU:** PY32F002A F15P (*TSSOP20 format*) - 32bit microcontroller having an ARM Cortex M0 core, manufactured by [Puya Semiconductors](https://www.puyasemi.com/)
+- **RS485 transceiver:** CS48520S manufactured by [ChipAnalog](https://e.chipanalog.com/products/interface/interface/interface3/1178)
+- **Voltage Regulator:**  78M05
 
 ### Other info
 
@@ -65,13 +65,14 @@ Registers have always a length of 2 bytes unless otherwise specified
 **Notes**
 
 - Temperature value type is INT16
-- Temperature is expressed as °C multiplied 10 (so a value of 182 means 18.2°C)
-- If the value from a temperature register is -32768 (0x8000) means sensor is not connected or sensor is broken/don't communicate. See Troubleshooting paragraph
+- Temperature is expressed as °C multiplied by 10 (so a value of 182 means 18.2°C)
+- If the value from a temperature register is -32768 (0x8000) means sensor is not connected or sensor is broken/don't communicate. See Troubleshooting paragraph for further informations
 
 #### Holding Registers (4x, FC:3=read, 6=write)
 
 | DEC | HEX | Default | Read Only | Description                                           |
 | --- | --- | ------- | --------- | ----------------------------------------------------- |
+| ... | ... | 0       | x         | [0 - 159 looks unused]                                |
 | 160 | A0  |         | x         | Temperature  value from D1                            |
 | 161 | A1  |         | x         | Temperature  value from D2                            |
 | 162 | A2  |         | x         | Temperature  value from D3                            |
@@ -80,20 +81,22 @@ Registers have always a length of 2 bytes unless otherwise specified
 | 165 | A5  |         | x         | Temperature  value from D6                            |
 | 166 | A6  |         | x         | Temperature  value from D7                            |
 | 167 | A7  |         | x         | Temperature  value from D8                            |
+| ... | ... | 0       | x         | [168 - 242 looks unused]                              |
 | 243 | F3  | 0       |           | Write 1 here if sensor wires are longer than 5 meters |
 | 244 | F4  | 10      |           | ?                                                     |
 | 245 | F5  | 0       |           | ?                                                     |
+| ... | ... | 0       | x         | [246 - 251 looks unused]                              |
 | 252 | FC  | 0       |           | ?                                                     |
-| 253 | FD  | 1       |           | RS485 Address                                         |
-| 254 | FE  | 3       |           | Baudrate (3=9600)                                     |
+| 253 | FD  | 1       |           | RS485 Address (aka Unit Id)                           |
+| 254 | FE  | 3       |           | Baudrate (3 ⇒ 9600)                                   |
 | 255 | FF  | 0       |           | ?                                                     |
 
 **Notes**
 
 - As you can see, temperature values from sensors is duplicated in Holding Registers starting from address `4 0160` (`4x 00A0`)
-- Registers from `246` (`F6`) to `251` (`FB`) are always 0 and they are not writable (if you try to write a value to them, it will not cause errors but registers will remain unchanged to 0)
-- Address change is effective as soon is executed, so the board don't need a restart for acquiring the new Address / Unit ID
-- The Baudrate setting probably follow other similar boards from the same manufacturer (like the R4DCB08) so I can suppose (but I have not tested this):
+- Registers from `4 0246` (`4x 00F6`) to `4 0251` (`4x 00FB`) are always 0 and they are not writable (if you try to write a value to them, it will not cause errors but registers will remain unchanged to 0)
+- Address change is effective as soon is executed, so the board doesn't need to reboot for acquiring the new Address / Unit ID
+- The Baudrate setting probably follows other similar boards from the same manufacturer (like the R4DCB08) so I can suppose (but I have not tested this):
   
   - 0 ⇒ 1200
   - 1 ⇒ 2400
@@ -101,10 +104,10 @@ Registers have always a length of 2 bytes unless otherwise specified
   - 3 ⇒ 9600 (default)
   - 4 ⇒ 19200
 
-- Descriptions I wrote as '?' means that changing the value in the corrispondent register does not apparently have any effect (value is written but I don't see any change in board beahaviour)
-- Like similar boards from the same manufacturer, I'd expect there is some register that can do the temperature correction
+- Descriptions I wrote as '?' means that changing the value in the corrispondent register does not apparently take any effect (value is written but I don't see any change in device beahaviour)
+- Like similar boards from the same manufacturer, I'd expect some register that can do the temperature correction
 
 ### Troubleshooting
 
-- If you're sure sensor is good (it works with other devices) and it's properly connected, but you're not able to read temperature value (you always obtain -32768/0x8000), try to write 1 in the register `4 0253`
+- If you're not able to read temperature value (you always obtain -32768/0x8000), you're sure sensor is good (it works with other devices) and it's properly connected, try to write 1 in the register `4 0253` (`4x 00FD`)
 - Data lines for each sensors are pulled up by resistor arrays marked as RA1 and RA2: they're array of 4x 4.7kΩ resistors. If you still cannot read temperature from sensor after the change in register `4 0253` you can try to lower the resistance under to 3.9kΩ or 2.7kΩ
