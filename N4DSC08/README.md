@@ -66,7 +66,7 @@ Registers have always a length of 2 bytes unless otherwise specified
 
 - Temperature value type is INT16
 - Temperature is expressed as °C multiplied by 10 (so a value of 182 means 18.2°C)
-- If the value from a temperature register is -32768 (0x8000) means sensor is not connected or sensor is broken/don't communicate. See Troubleshooting paragraph for further informations
+- If the value from a temperature register is -32768 (0x8000) means sensor is not connected or sensor is broken/don't communicate for some reason (maybe wires too long). See Troubleshooting paragraph for further informations
 
 #### Holding Registers (4x, FC:3=read, 6=write)
 
@@ -93,7 +93,7 @@ Registers have always a length of 2 bytes unless otherwise specified
 
 **Notes**
 
-- As you can see, temperature values from sensors is duplicated in Holding Registers starting from address `4 0160` (`4x 00A0`)
+- As you can see, temperature values from sensors are duplicated in Holding Registers starting from address `4 0160` (`4x 00A0`)
 - Registers from `4 0246` (`4x 00F6`) to `4 0251` (`4x 00FB`) are always 0 and they are not writable (if you try to write a value to them, it will not cause errors but registers will remain unchanged to 0)
 - Address change is effective as soon is executed, so the board doesn't need to reboot for acquiring the new Address / Unit ID
 - The Baudrate setting probably follows other similar boards from the same manufacturer (like the R4DCB08) so I can suppose (but I have not tested this):
@@ -109,5 +109,5 @@ Registers have always a length of 2 bytes unless otherwise specified
 
 ### Troubleshooting
 
-- If you're not able to read temperature value (you always obtain -32768/0x8000), you're sure sensor is good (it works with other devices) and it's properly connected, try to write 1 in the register `4 0253` (`4x 00FD`)
-- Data lines for each sensors are pulled up by resistor arrays marked as RA1 and RA2: they're array of 4x 4.7kΩ resistors. If you still cannot read temperature from sensor after the change in register `4 0253` you can try to lower the resistance under to 3.9kΩ or 2.7kΩ
+- If you're not able to read temperature value (you always obtain -32768/0x8000), you're sure sensor is good (it works with other devices) and it's properly connected, try to write value `1` in the register `4 0253` (`4x 00FD`)
+- Data lines for each sensors are pulled up by resistor arrays marked as RA1 and RA2: they're arrays of 4x 4.7kΩ resistors. If you still cannot read temperature from sensor after the change in register `4 0253` you can try to lower the resistance under to 3.9kΩ or 2.7kΩ
