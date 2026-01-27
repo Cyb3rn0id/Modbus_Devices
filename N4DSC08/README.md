@@ -6,22 +6,23 @@
 
 ### Main Info
 
-- **Manufacturer:** [Eletechsup](https://eletechsup.com/)
-- **Power Supply:** 7÷30VDC
-- **Protected against reversed power supply:** YES
-- **Optoisolated inputs:** NO
-- **Max working Current:** 18mA
-- **RS485 Default Config:** 9600,N,8,1
-- **RS485 Default Address:** 1
-- **Address changeable by:** RS485 command
-- **Address base:** 0
-- **Start Address:** 0
-- **Size (board only):** 75 x 50 x 14mm
-- **Size (with DIN housing if available):** 80 x 54 x 26mm
-- **Weight (board only):** 36g
-- **Weight (with DIN housing if available):** 66g
-- **Official Product Page:** [N4DSC08](https://eletechsup.com/products/n4dsc08-8ch-rs485-ds18b20-sensor-temperature-collector-modbus-remote-io-module-for-plc-paperless-recorder-thermostatic-controls)
-- **Sponsored link for buying:** N/A
+| Parameter                                | Value   |
+| ---------------------------------------- | ---- |
+| Manufacturer                             | [Eletechsup](https://eletechsup.com/)   |
+| Official Product Page                    | [N4DSC08](https://eletechsup.com/products/n4dsc08-8ch-rs485-ds18b20-sensor-temperature-collector-modbus-remote-io-module-for-plc-paperless-recorder-thermostatic-controls)  |
+| Power Supply                             | 7÷30VDC |
+| Protected against reversed power supply  | YES     |
+| Optoisolated inputs                      | NO  |
+| Max working Current                      | 18mA |
+| RS485 Default Config                     | 9600,N,8,1  |
+| Address changeable by                    | Modbus command |
+| Address base                             | 0  |
+| Start Address                            | 0  |
+| Size (board only)                        | 75 x 50 x 14mm  |
+| Size (with DIN housing)                  | 80 x 54 x 26mm  |
+| Weight (board only)                      | 36g  |
+| Weight (with DIN housing)                | 66g  |
+| Sponsored link for buying                | N/A |
 
 ### Chips on board
 
